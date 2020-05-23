@@ -15,7 +15,8 @@
     "@nuxtjs/axios": "^5.3.6",
     "@nuxtjs/bulma": "^1.2.1",
     "@nuxtjs/pwa": "^3.0.0-0",
-    "nuxt": "^2.12.2"
+    "nuxt": "^2.12.2",
+    "vue-simple-markdown": "^1.1.4"
   },
   "devDependencies": {
     "@nuxt/components": "^0.2.5",

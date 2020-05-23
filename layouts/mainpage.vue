@@ -1,6 +1,6 @@
 <template>
   <div>
-    <shnavbar />
+    <navbar />
     <nuxt />
   </div>
 </template>

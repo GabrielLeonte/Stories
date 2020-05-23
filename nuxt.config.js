@@ -27,7 +27,7 @@ export default {
   /*
    ** Plugins to load before mounting the App
    */
-  plugins: [],
+  plugins: [{ src: './plugins/markdown.js' }],
   /*
    ** Nuxt.js dev-modules
    */

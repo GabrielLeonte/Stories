@@ -61,6 +61,12 @@
   </div>
 </template>
 
+<script>
+export default {
+  layout: "mainpage"
+}
+</script>
+
 <style scoped>
 @import url('https://fonts.googleapis.com/css2?family=The+Girl+Next+Door&display=swap');
 @import url('https://fonts.googleapis.com/css2?family=Roboto:wght@300&display=swap');
@@ -125,7 +131,7 @@
 
 .body {
   position: relative;
-  height: 55vh;
+  height: 60vh;
 }
 
 .custom-title {
@@ -146,7 +152,7 @@
 
 .right img {
   margin-top: 50px;
-  width: 400px;
+  width: 460px;
 }
 
 .left {
