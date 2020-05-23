@@ -55,6 +55,10 @@ export default {
 <style scoped>
 @import url('https://fonts.googleapis.com/css2?family=Reenie+Beanie&display=swap');
 
+.navbar-burger {
+  color: #ffffff !important;
+}
+
 .custom-title {
   font-family: 'Reenie Beanie', cursive;
   font-size: 45px;
@@ -70,5 +74,9 @@ export default {
   font-family: 'Reenie Beanie', cursive;
   font-size: 25px;
   color: #ffffff;
+}
+
+.custom-button:hover {
+  text-decoration: underline;
 }
 </style>

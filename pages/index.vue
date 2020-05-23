@@ -1,7 +1,11 @@
 <template>
   <div>
-    <div class="header">
-      <img src="../assets/main.svg" style="width: 100%;position: absolute" />
+    <div class="header red-block">
+      <img
+        src="../assets/main.svg"
+        class="header-img"
+        style="width: 100%;position: absolute"
+      />
       <div class="container">
         <h1 class="title">
           Send an anonymous love letter <br />
@@ -29,14 +33,13 @@
         </div>
       </div>
     </div>
-    <div class="container body">
+    <div class="container body sh">
       <span class="custom-title">
-        Enjoying reading <br />
-        love storys ?
+        Enjoying reading love storys ?
       </span>
 
       <div class="left">
-        <div style="margin-top: 35px; margin-bottom: 25px;">
+        <div class="buttons">
           <nuxt-link to="/write" class="custom-button">
             Let me write my story
           </nuxt-link>
@@ -122,7 +125,7 @@
 
 .body {
   position: relative;
-  height: 70vh;
+  height: 55vh;
 }
 
 .custom-title {
@@ -130,12 +133,20 @@
   font-weight: 700;
   color: #313131;
   font-size: 45px;
+  position: absolute;
+  float: left;
+  margin-bottom: 20px;
 }
 
 .sub-body {
   position: relative;
   width: 100%;
   display: block;
+}
+
+.right img {
+  margin-top: 50px;
+  width: 400px;
 }
 
 .left {
@@ -150,9 +161,94 @@
 .bottom {
   position: relative;
   line-height: 3vh;
-  height: 3.5vh;
   text-align: center;
   background: #d63447;
   bottom: 0;
+}
+
+.header .custom-button {
+  float: left;
+}
+
+@media screen and (max-width: 1250px) {
+  .header-img {
+    display: none;
+  }
+
+  .red-block {
+    background: #d63447;
+    display: block;
+    height: 80vh;
+  }
+
+  .header {
+    padding-left: 3%;
+  }
+
+  .title {
+    font-size: 2.8rem;
+  }
+
+  .subtitle {
+    text-align: left;
+    margin-left: 0;
+    font-size: 1.3rem;
+  }
+
+  .custom-button {
+    position: relative;
+    display: block;
+    margin-top: 50px;
+    width: 240px;
+    text-align: center;
+  }
+
+  .body {
+    margin-top: 5%;
+    width: 100%;
+    margin-bottom: -100px;
+  }
+
+  .custom-title {
+    width: 100%;
+    font-size: 2.5rem;
+    display: block;
+    text-align: center;
+    float: center;
+    margin-top: 30px;
+  }
+
+  .sub-body {
+    width: 100%;
+  }
+
+  .left {
+    width: 100%;
+  }
+
+  img {
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+    margin-top: 60px;
+    padding-left: 5%;
+  }
+
+  .right img {
+    display: none;
+  }
+
+  .custom-button {
+    text-align: center;
+    float: center !important;
+  }
+
+  .buttons {
+    margin-top: 50px;
+  }
+
+  .bottom {
+    opacity: 0;
+  }
 }
 </style>
