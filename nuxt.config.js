@@ -43,7 +43,25 @@ export default {
     '@nuxtjs/bulma',
     // Doc: https://axios.nuxtjs.org/usage
     '@nuxtjs/axios',
-    '@nuxtjs/pwa'
+    '@nuxtjs/pwa',
+    [
+      '@nuxtjs/firebase',
+      {
+        config: {
+          apiKey: 'AIzaSyCSDtpeV_XX3-qe7XvEBzWa8YlW1VTNYTs',
+          authDomain: 'stories-aca62.firebaseapp.com',
+          databaseURL: 'https://stories-aca62.firebaseio.com',
+          projectId: 'stories-aca62',
+          storageBucket: 'stories-aca62.appspot.com',
+          messagingSenderId: '949322886304',
+          appId: '1:949322886304:web:5d21aa4fb5ccd98630edc5',
+          measurementId: 'G-W0MN2HELPS'
+        },
+        services: {
+          realtimeDb: true // Just as example. Can be any other service.
+        }
+      }
+    ]
   ],
   /*
    ** Axios module configuration
