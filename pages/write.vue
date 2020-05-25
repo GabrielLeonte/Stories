@@ -1,37 +1,80 @@
 <template>
   <div class="container">
     <div class="box" style="margin-top: 3%">
-      <input
-        type="text"
-        class="inputs"
-        placeholder="Title"
-        style="margin-top: -5px;"
-        v-model="title"
-      />
-      <input
-        type="email"
-        class="inputs"
-        placeholder="Lover email address"
-        v-model="email"
-      />
-      <input
-        type="text"
-        class="inputs"
-        placeholder="Paying address (optional)"
-        v-model="pay_address"
-      />
-      <textarea placeholder="Markdown body" v-model="source" />
-      <div style="display: block; margin-bottom: 50px;">
-        <input type="checkbox" id="send" value="true" />
-        <label for="send">Make it a public post? </label>
-      </div>
-      <div>
-        <button class="custom-button">Preview</button>
-        <button class="custom-button">Submit</button>
-      </div>
+      <form @submit.prevent="submit">
+        <input
+          type="text"
+          class="inputs"
+          placeholder="Title"
+          style="margin-top: -5px;"
+          v-model="title"
+          required
+        />
+        <input
+          type="email"
+          class="inputs"
+          placeholder="Lover email address"
+          v-model="email"
+          required
+        />
+        <input
+          type="text"
+          class="inputs"
+          placeholder="Paying address (optional)"
+          v-model="pay_address"
+        />
+        <textarea placeholder="Markdown body" v-model="source" required />
+        <div style="display: block; margin-bottom: 50px;">
+          <input type="checkbox" id="send" value="true" v-model="public_it" />
+          <label for="send" style="color: #313131; padding-left: 5px;">
+            Make it a public post?
+          </label>
+        </div>
+        <div>
+          <button class="custom-button">Preview</button>
+          <button type="submit" class="custom-button">Submit</button>
+        </div>
+      </form>
     </div>
   </div>
 </template>
+
+<script>
+export default {
+  data() {
+    return {
+      title: '',
+      email: '',
+      pay_address: '',
+      public_it: false,
+      source: ''
+    }
+  },
+  methods: {
+    async submit() {
+      try {
+        // get all posts from database
+        let id = (await this.$fireDb.ref('/posts').once('value')).val()
+
+        // if database is empty, the new id will be 1, else it will be the lenght of the array
+        if (id === null) id = 1
+        else id = id.length
+
+        // write the data into the database if the user wants to make it a public story and start receive payments
+        if (this.public_it)
+          await this.$fireDb.ref('/posts/' + id).set({
+            title: this.title,
+            email: this.email,
+            pay_address: this.pay_address,
+            data: this.source
+          })
+      } catch (err) {
+        if (err) alert(err)
+      }
+    }
+  }
+}
+</script>
 
 <style scoped>
 .inputs {
@@ -74,31 +117,3 @@ textarea {
   background: #151515;
 }
 </style>
-
-<script>
-export default {
-  layout: 'default',
-  data() {
-    return {
-      title: '',
-      email: '',
-      pay_address: '',
-      source: ''
-    }
-  },
-  async mounted() {
-    try {
-      await this.$fireDb.ref('/posts/2').set({
-        data: 'hi',
-        email: 'hsahdasjas',
-        pay_address: 'oke'
-      })
-
-      const data = await this.$fireDb.ref('/posts').once('value')
-      console.log(data.val())
-    } catch (err) {
-      if (err) alert(err)
-    }
-  }
-}
-</script>
