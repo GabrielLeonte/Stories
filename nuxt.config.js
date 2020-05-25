@@ -1,10 +1,12 @@
+require("dotenv").config();
+
 export default {
   mode: 'universal',
   /*
    ** Headers of the page
    */
   head: {
-    title: process.env.npm_package_name || '',
+    title: process.env.messagingSenderId,
     meta: [
       { charset: 'utf-8' },
       { name: 'viewport', content: 'width=device-width, initial-scale=1' },
@@ -24,6 +26,10 @@ export default {
    ** Global CSS
    */
   css: [],
+
+  env: {
+    title: process.env.TEST
+  },
   /*
    ** Plugins to load before mounting the App
    */
@@ -33,7 +39,8 @@ export default {
    */
   buildModules: [
     // Doc: https://github.com/nuxt-community/eslint-module
-    '@nuxt/components'
+    '@nuxt/components',
+    '@nuxtjs/dotenv'
   ],
   /*
    ** Nuxt.js modules
@@ -48,14 +55,14 @@ export default {
       '@nuxtjs/firebase',
       {
         config: {
-          apiKey: 'AIzaSyCSDtpeV_XX3-qe7XvEBzWa8YlW1VTNYTs',
-          authDomain: 'stories-aca62.firebaseapp.com',
-          databaseURL: 'https://stories-aca62.firebaseio.com',
-          projectId: 'stories-aca62',
-          storageBucket: 'stories-aca62.appspot.com',
-          messagingSenderId: '949322886304',
-          appId: '1:949322886304:web:5d21aa4fb5ccd98630edc5',
-          measurementId: 'G-W0MN2HELPS'
+          apiKey: process.env.apiKey,
+          authDomain: process.env.authDomain,
+          databaseURL: process.env.databaseURL,
+          projectId: process.env.projectId,
+          storageBucket: process.env.storageBucket,
+          messagingSenderId: process.env.messagingSenderId,
+          appId: process.env.appId,
+          measurementId: process.env.measurementId
         },
         services: {
           realtimeDb: true // Just as example. Can be any other service.

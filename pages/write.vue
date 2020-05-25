@@ -27,7 +27,7 @@
         <div style="display: block; margin-bottom: 50px;">
           <input type="checkbox" id="send" value="true" v-model="public_it" />
           <label for="send" style="color: #313131; padding-left: 5px;">
-            Make it a public post?
+            Make it a public post? {{ }}
           </label>
         </div>
         <div>
