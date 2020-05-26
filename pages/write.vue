@@ -1,6 +1,7 @@
 <template>
-  <div class="container">
-    <div class="box" style="margin-top: 3%">
+  <div class="">
+    <notifications group="foo" />
+    <div class="box container" style="margin-top: 3%">
       <form @submit.prevent="submit">
         <input
           type="text"
@@ -27,7 +28,7 @@
         <div style="display: block; margin-bottom: 50px;">
           <input type="checkbox" id="send" value="true" v-model="public_it" />
           <label for="send" style="color: #313131; padding-left: 5px;">
-            Make it a public post? {{ }}
+            Make it a public post?
           </label>
         </div>
         <div>
@@ -60,14 +61,54 @@ export default {
         if (id === null) id = 1
         else id = id.length
 
-        // write the data into the database if the user wants to make it a public story and start receive payments
-        if (this.public_it)
-          await this.$fireDb.ref('/posts/' + id).set({
+        // set addMessage function from firebase
+        const addMessage = this.$fireFunc.httpsCallable('sendEmail')
+
+        // send the magic email
+        const hatz = await addMessage({
+          title: this.title,
+          email: this.email,
+          pay_address: this.pay_address,
+          data: this.source
+        })
+
+        // handle response status
+        if (hatz.data.status === 'ok') {
+          this.$notify({
+            group: 'foo',
+            title: 'The email is fine!',
+            type: 'success',
+            text: 'Your email has been sent!'
+          })
+
+          // reset each parameter
+          this.title = ''
+          this.email = ''
+          this.pay_address = ''
+          this.source = false
+        } else
+          return this.$notify({
+            group: 'foo',
+            title: 'The email is :((',
+            type: 'error',
+            text:
+              'Your email coudn"t be delivered :(\n Details: ' + hatz.data.err
+          })
+
+        // handle is public checkbox
+        if (this.public_it) {
+          // write the data into the database if the user wants to make it a public story and start receive payments
+
+          await this.$fireDb.ref(`/posts/${id}`).set({
             title: this.title,
             email: this.email,
             pay_address: this.pay_address,
             data: this.source
           })
+
+          // push user to the post page
+          this.$router.push(`/posts/${id}`)
+        }
       } catch (err) {
         if (err) alert(err)
       }

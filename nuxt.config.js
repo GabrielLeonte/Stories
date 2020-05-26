@@ -1,4 +1,4 @@
-require("dotenv").config();
+require('dotenv').config()
 
 export default {
   mode: 'universal',
@@ -6,7 +6,7 @@ export default {
    ** Headers of the page
    */
   head: {
-    title: process.env.messagingSenderId,
+    title: 'Stories',
     meta: [
       { charset: 'utf-8' },
       { name: 'viewport', content: 'width=device-width, initial-scale=1' },
@@ -33,7 +33,10 @@ export default {
   /*
    ** Plugins to load before mounting the App
    */
-  plugins: [{ src: './plugins/markdown.js' }],
+  plugins: [
+    { src: './plugins/markdown.js' },
+    { src: './plugins/notifications.js', ssr: false }
+  ],
   /*
    ** Nuxt.js dev-modules
    */
@@ -65,7 +68,8 @@ export default {
           measurementId: process.env.measurementId
         },
         services: {
-          realtimeDb: true // Just as example. Can be any other service.
+          realtimeDb: true, // Just as example. Can be any other service.
+          functions: true
         }
       }
     ]
