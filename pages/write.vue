@@ -81,11 +81,27 @@ export default {
             text: 'Your email has been sent!'
           })
 
+          // handle is public checkbox
+          if (this.public_it) {
+            // write the data into the database if the user wants to make it a public story and start receive payments
+
+            await this.$fireDb.ref(`/posts/${id}`).set({
+              title: this.title,
+              email: this.email,
+              pay_address: this.pay_address,
+              data: this.source
+            })
+
+            // push user to the post page
+            this.$router.push(`/posts/${id}`)
+          }
+
           // reset each parameter
           this.title = ''
           this.email = ''
           this.pay_address = ''
-          this.source = false
+          this.source = ''
+          this.public_it = false
         } else
           return this.$notify({
             group: 'foo',
@@ -94,21 +110,6 @@ export default {
             text:
               'Your email coudn"t be delivered :(\n Details: ' + hatz.data.err
           })
-
-        // handle is public checkbox
-        if (this.public_it) {
-          // write the data into the database if the user wants to make it a public story and start receive payments
-
-          await this.$fireDb.ref(`/posts/${id}`).set({
-            title: this.title,
-            email: this.email,
-            pay_address: this.pay_address,
-            data: this.source
-          })
-
-          // push user to the post page
-          this.$router.push(`/posts/${id}`)
-        }
       } catch (err) {
         if (err) alert(err)
       }
