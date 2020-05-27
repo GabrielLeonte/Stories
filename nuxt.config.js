@@ -35,6 +35,7 @@ export default {
    */
   plugins: [
     { src: './plugins/markdown.js' },
+    { src: './plugins/vue-meta.js' },
     { src: './plugins/notifications.js', ssr: false }
   ],
   /*

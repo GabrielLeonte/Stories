@@ -28,13 +28,13 @@
     <div id="navbarBasicExample" class="navbar-menu">
       <div class="navbar-end">
         <div class="navbar-item">
-          <nuxt-link to="/read" class="custom-button">
-            Read a story
+          <nuxt-link to="/write" class="custom-button">
+            Write a story
           </nuxt-link>
         </div>
         <div class="navbar-item">
-          <nuxt-link to="/write" class="custom-button">
-            Write a story
+          <nuxt-link to="/" class="custom-button">
+            Home
           </nuxt-link>
         </div>
       </div>
@@ -47,23 +47,6 @@ export default {
   data() {
     return {
       isActive: false
-    }
-  },
-  metaInfo() {
-    return {
-      title: 'Stories',
-      meta: [
-        {
-          name: 'description',
-          content:
-            'Stories is a simple way to send an anonymous love letter, and get paid for it'
-        },
-        {
-          property: 'og:title',
-          content: 'Stories - Its time to love more'
-        },
-        { property: 'og:site_name', content: 'Stories' }
-      ]
     }
   }
 }
@@ -78,9 +61,11 @@ export default {
 
 .custom-title {
   font-family: 'Reenie Beanie', cursive;
-  font-size: 45px;
+  font-size: 30px;
+  vertical-align: middle;
   color: #ffffff;
   margin-left: 20px;
+  margin-top: 5px;
 }
 
 .custom-title:hover {

@@ -21,10 +21,10 @@
         <input
           type="text"
           class="inputs"
-          placeholder="Paying address (optional)"
+          placeholder="Wallet (optional)"
           v-model="pay_address"
         />
-        <textarea placeholder="Markdown body" v-model="source" required />
+        <textarea placeholder="Body" v-model="source" required />
         <div style="display: block; margin-bottom: 50px;">
           <input type="checkbox" id="send" value="true" v-model="public_it" />
           <label for="send" style="color: #313131; padding-left: 5px;">
@@ -32,7 +32,6 @@
           </label>
         </div>
         <div>
-          <button class="custom-button">Preview</button>
           <button type="submit" class="custom-button">Submit</button>
         </div>
       </form>
@@ -84,16 +83,17 @@ export default {
           // handle is public checkbox
           if (this.public_it) {
             // write the data into the database if the user wants to make it a public story and start receive payments
-
             await this.$fireDb.ref(`/posts/${id}`).set({
+              id: id,
               title: this.title,
               email: this.email,
               pay_address: this.pay_address,
-              data: this.source
+              data: this.source,
+              earned: 0
             })
 
-            // push user to the post page
-            this.$router.push(`/posts/${id}`)
+            // push user to the posts page
+            this.$router.push(`/read`)
           }
 
           // reset each parameter

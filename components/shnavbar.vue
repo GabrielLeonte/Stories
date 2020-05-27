@@ -48,6 +48,23 @@ export default {
     return {
       isActive: false
     }
+  },
+  metaInfo() {
+    return {
+      title: 'Stories',
+      meta: [
+        {
+          name: 'description',
+          content:
+            'Stories is a simple way to send an anonymous love letter, and get paid for it'
+        },
+        {
+          property: 'og:title',
+          content: 'Stories - Its time to love more'
+        },
+        { property: 'og:site_name', content: 'Stories' }
+      ]
+    }
   }
 }
 </script>
