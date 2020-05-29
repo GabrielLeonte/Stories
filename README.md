@@ -59,3 +59,5 @@ $ npm run start
 # generate static project
 $ npm run generate
 ```
+
+Also make sure to setup firebase function from the other repository!
